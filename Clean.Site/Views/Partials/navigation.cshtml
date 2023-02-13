@@ -2,7 +2,8 @@
 
 @{
     var homePage = Umbraco.AssignedContentItem.AncestorOrSelf<HomePage>();
-    var children = homePage?.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+    // var children = homePage?.Children?.Where(x => x.IsVisible()) ?? Enumerable.Empty<IPublishedContent>();
+    var children = homePage?.MainNavigation;
 }
 
 <!-- Navigation-->
@@ -19,7 +20,7 @@
                 @if(children != null && children.Any()){
 
                     @foreach(var item in children) {
-                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="@homePage?.Url()">About</a></li>
+                        <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="@item?.Url">@item?.Name</a></li>
                     }
                 }
             </ul>
